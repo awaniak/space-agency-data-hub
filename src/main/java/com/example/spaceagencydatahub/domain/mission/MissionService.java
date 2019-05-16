@@ -1,7 +1,7 @@
 package com.example.spaceagencydatahub.domain.mission;
 
 import com.example.spaceagencydatahub.domain.mission.model.Mission;
-import com.example.spaceagencydatahub.domain.mission.model.MissionPayload;
+import com.example.spaceagencydatahub.domain.mission.model.CreateMissionDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +16,8 @@ public class MissionService {
         this.missionRepository = missionRepository;
     }
 
-    public Mission add(MissionPayload missionPayload) {
-        return missionRepository.save(new Mission(missionPayload));
+    public Mission add(CreateMissionDto createMissionDto) {
+        return missionRepository.save(new Mission(createMissionDto));
     }
 
     public Mission edit(Mission mission) {

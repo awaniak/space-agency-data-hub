@@ -19,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne()
     private Mission mission;
 
     private Instant acquisitionDate;

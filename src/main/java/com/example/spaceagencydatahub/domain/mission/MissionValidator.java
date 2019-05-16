@@ -1,7 +1,8 @@
 package com.example.spaceagencydatahub.domain.mission;
 
 import com.example.spaceagencydatahub.domain.mission.model.Mission;
-import com.example.spaceagencydatahub.domain.mission.model.MissionPayload;
+import com.example.spaceagencydatahub.domain.mission.model.CreateMissionDto;
+import com.example.spaceagencydatahub.domain.product.ProductService;
 import com.example.spaceagencydatahub.util.ValidationResult;
 import org.springframework.stereotype.Component;
 
@@ -11,30 +12,21 @@ public class MissionValidator {
 
     private MissionService missionService;
 
-    public MissionValidator(MissionService missionService) {
+    private ProductService productService;
+
+    public MissionValidator(MissionService missionService, ProductService productService) {
         this.missionService = missionService;
+        this.productService = productService;
     }
 
-    ValidationResult checkIfAddMissionValid(MissionPayload missionPayload) {
+    ValidationResult checkIfAddMissionValid(CreateMissionDto createMissionDto) {
         StringBuilder message = new StringBuilder();
         boolean isError = false;
-        if (missionPayload.getName() == null) {
+        if (createMissionDto.getName() == null) {
             isError = true;
             message.append("Mission name is not provided; ");
         }
-        if (missionPayload.getStartDate() == null) {
-            isError = true;
-            message.append("Start date is not provided; ");
-        }
-        if (missionPayload.getFinishDate() == null) {
-            isError = true;
-            message.append("Finish date is not provided; ");
-        }
-        if (missionPayload.getImageryType() == null) {
-            isError = true;
-            message.append("Imagery type is not provided; ");
-        }
-        if (missionService.findByName(missionPayload.getName()).isPresent()) {
+        if (missionService.findByName(createMissionDto.getName()).isPresent()) {
             isError = true;
             message.append("Mission with provided name exists; ");
         }
@@ -53,15 +45,6 @@ public class MissionValidator {
         }else if (mission.getName() == null) {
             isError = true;
             message.append("Mission name is not provided; ");
-        } else if (mission.getStartDate() == null) {
-            isError = true;
-            message.append("Start date is not provided; ");
-        } else if (mission.getFinishDate() == null) {
-            isError = true;
-            message.append("Finish date is not provided; ");
-        } else if (mission.getImageryType() == null) {
-            isError = true;
-            message.append("Imagery type is not provided; ");
         }
         return new ValidationResult(isError, message.toString());
 
@@ -73,7 +56,8 @@ public class MissionValidator {
         if (!missionService.findById(missionId).isPresent()) {
             isError = true;
             message.append("Cannot find mission with provided id: ").append(missionId.toString());
-        } else if (!missionService.findById(missionId).get().getProducts().isEmpty()){
+        }
+        else if (!productService.findByMissionId(missionId).isEmpty()){
             isError = true;
             message.append("Cannot remove mission with products; ");
         }

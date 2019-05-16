@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,14 +24,11 @@ public class Mission {
     private Instant startDate;
     private Instant finishDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<Product> products;
-
-    public Mission(MissionPayload missionPayload) {
-        this.name = missionPayload.getName();
-        this.imageryType = missionPayload.getImageryType();
-        this.startDate = missionPayload.getStartDate();
-        this.finishDate = missionPayload.getFinishDate();
+    public Mission(CreateMissionDto createMissionDto) {
+        this.name = createMissionDto.getName();
+        this.imageryType = createMissionDto.getImageryType();
+        this.startDate = createMissionDto.getStartDate();
+        this.finishDate = createMissionDto.getFinishDate();
     }
 
 }

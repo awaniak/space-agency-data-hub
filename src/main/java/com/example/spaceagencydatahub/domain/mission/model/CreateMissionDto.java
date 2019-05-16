@@ -10,7 +10,7 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MissionPayload {
+public class CreateMissionDto {
 
     private String name;
     private ImageryType imageryType;
