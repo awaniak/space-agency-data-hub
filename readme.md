@@ -12,11 +12,12 @@ Application works on localhost:8080
 
 Under address: http://localhost:8080/swagger-ui.html#/ is available api documentation, to get access is needed to log in with manager credentials
 
+Manager credentials:
+manager:password
+
 Customer credentials: 
 customer:password
 
-Manager credentials:
-manager:password
 
 Example queries:
 
