@@ -1,4 +1,4 @@
-https://travis-ci.com/awaniak/space-agency-data-hub.svg?branch=master
+[![Build Status](https://travis-ci.com/awaniak/space-agency-data-hub.svg?branch=master)](https://travis-ci.com/awaniak/space-agency-data-hub)
 
 **(Instar)Space Agency Data Hub**
 
