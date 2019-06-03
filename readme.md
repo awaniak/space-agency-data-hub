@@ -1,3 +1,5 @@
+https://travis-ci.com/awaniak/space-agency-data-hub.svg?branch=master
+
 **(Instar)Space Agency Data Hub**
 
 Example REST api
